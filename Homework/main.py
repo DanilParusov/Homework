@@ -13,7 +13,7 @@ dictionary = load_canditates()
 @app.route("/")
 def get_all():
     for i in range(0, 7):
-        name = f"Имя - {dictionary[i]['name']}\nПозиция: {dictionary[i]['position']}\nНавыки: {dictionary[i]['skills']}\n "
+        name = f"Имя - {dictionary[i]['name']}<br>\nПозиция: {dictionary[i]['position']}<br>\nНавыки: {dictionary[i]['skills']}<br><br>\n "
         yield name
 
 @app.route("/candidates/<pk>")
@@ -23,15 +23,14 @@ def get_by_pk(pk):
     position = dictionary[pk]['position']
     skills = dictionary[pk]['skills']
     url = dictionary[pk]['picture']
-    return f"{url}\n{name}\n{position}\n{skills}"
+    return f"<img src={url}><br>\nИмя - {name}<br>\nПозиция: {position}<br>\nНавыки: {skills}<br><br>"
 
 @app.route("/skills/<skill_name>")
 def get_by_skill(skill_name):
     for i in range(0, 7):
         person_skills = str(dictionary[i]["skills"]).lower()
         if skill_name in person_skills:
-            yield f"{dictionary[i]['name']}\n"
+            yield f"Имя - {dictionary[i]['name']}<br>\nПозиция: {dictionary[i]['position']}<br>\nНавыки: {dictionary[i]['skills']}<br><br>\n "
 
 
 app.run()
-
